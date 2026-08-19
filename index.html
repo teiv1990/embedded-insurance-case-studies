@@ -1,225 +1,485 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Case Study Bảo Hiểm Nhúng Toàn Cầu</title>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css">
+  <title>Báo Cáo Benchmark & Case Study Bảo Hiểm Nhúng Toàn Cầu</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    .markdown-body {
-      box-sizing: border-box;
-      min-width: 200px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 45px;
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    @media (max-width: 767px) {
-      .markdown-body {
-        padding: 15px;
-      }
-    }
-    .markdown-body table {
-      display: table !important;
-      width: 100% !important;
-      overflow-x: auto;
-    }
-    .markdown-body table th, .markdown-body table td {
-      padding: 8px 12px;
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     tr.hidden-row {
       display: none !important;
     }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen">
-  <!-- Header Navbar -->
-  <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+<body class="bg-slate-900 text-slate-100 min-h-screen antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Sticky Navigation Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
       <div class="flex items-center space-x-3">
-        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-        </svg>
-        <div>
-          <h1 class="text-xl font-bold text-gray-900 leading-tight">Embedded Insurance Case Studies</h1>
-          <p class="text-xs text-gray-500">Báo cáo & Tổng hợp số liệu bảo hiểm nhúng toàn cầu</p>
-        </div>
-      </div>
-      <div class="flex items-center space-x-3 w-full sm:w-auto">
-        <div class="relative w-full sm:w-64">
-          <input type="text" id="searchInput" placeholder="Tìm kiếm case study..." class="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-          <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
           </svg>
         </div>
-        <a href="https://github.com/teiv1990/embedded-insurance-case-studies" target="_blank" class="inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors whitespace-nowrap">
-          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <div>
+          <h1 class="text-lg font-bold text-white tracking-tight">Embedded Insurance Intelligence</h1>
+          <p class="text-xs text-slate-400">Báo Cáo Benchmark & Data Case Studies 2026</p>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+        <a href="#case-studies" class="hover:text-indigo-400 transition-colors">Case Studies (63)</a>
+        <a href="#revenue-models" class="hover:text-indigo-400 transition-colors">Mẫu Doanh Thu</a>
+        <a href="#critical-insights" class="hover:text-indigo-400 transition-colors">Nhận Định Phản Biện</a>
+        <a href="#vietnam-roadmap" class="hover:text-indigo-400 transition-colors">Chiến Lược Việt Nam</a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <a href="https://github.com/teiv1990/embedded-insurance-case-studies" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition-all duration-200">
+          <svg class="w-4 h-4 mr-1.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           GitHub Repo
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Main Content Container -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-      <article id="content" class="markdown-body">Đang tải dữ liệu...</article>
+  <!-- Hero Header Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-b border-slate-800 py-16">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 mr-2 animate-pulse"></span> Báo Cáo Benchmark 2026 — Dữ liệu thực tế
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+          Case Study Bảo Hiểm Nhúng Toàn Cầu
+        </h2>
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed mb-8">
+          Tổng hợp chi tiết <strong class="text-white font-semibold">63 case studies có số liệu công bố</strong> từ các InsurTech & Nền tảng lớn (Cover Genius, Igloo, Chubb, Qover, Extend, bolttech, REIN, Vertical Insure). Kèm nguồn trích dẫn trực tiếp cho từng case study.
+        </p>
+      </div>
+
+      <!-- Executive KPI Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        <div class="bg-slate-800/80 border border-slate-700/60 rounded-xl p-5 shadow-lg">
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Tổng Số Case Study</p>
+          <div class="flex items-baseline space-x-2">
+            <span class="text-3xl font-extrabold text-white">63</span>
+            <span class="text-xs text-indigo-400 font-medium">Toàn cầu</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-2">Phủ từ E-commerce, Travel, Neobank tới Proptech & SaaS</p>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/60 rounded-xl p-5 shadow-lg">
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Mức Tăng Sales Đỉnh Điểm</p>
+          <div class="flex items-baseline space-x-2">
+            <span class="text-3xl font-extrabold text-emerald-400">+513%</span>
+            <span class="text-xs text-emerald-500 font-medium">Add-on sales</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-2">eBay + Cover Genius warranty add-on chỉ trong 4 tuần</p>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/60 rounded-xl p-5 shadow-lg">
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Conversion Đăng Ký Thuê Nhà</p>
+          <div class="flex items-baseline space-x-2">
+            <span class="text-3xl font-extrabold text-indigo-400">80%</span>
+            <span class="text-xs text-indigo-400 font-medium">Enrollment</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-2">Rhino deposit insurance trong leasing flow bất động sản</p>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/60 rounded-xl p-5 shadow-lg">
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Quy Mô Thị Trường 2030</p>
+          <div class="flex items-baseline space-x-2">
+            <span class="text-3xl font-extrabold text-blue-400">$700B</span>
+            <span class="text-xs text-blue-400 font-medium">Global P&C</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-2">Dự báo tăng trưởng toàn cầu từ báo cáo Deloitte InsurTech</p>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <!-- SECTION 1: CASE STUDIES DATABASE -->
+    <section id="case-studies" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <h3 class="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+            </svg>
+            Bảng Case Study Có Số Liệu & Nguồn Trích Dẫn
+          </h3>
+          <p class="text-sm text-slate-400 mt-1">Tra cứu 63 trường hợp thực tế, tìm kiếm theo tên thương hiệu, metric hoặc xem trực tiếp nguồn công bố.</p>
+        </div>
+        <div id="resultCount" class="text-xs font-semibold text-indigo-400 bg-indigo-500/10 px-3 py-1.5 rounded-lg border border-indigo-500/20 self-start md:self-auto">
+          Hiển thị 63 / 63 case studies
+        </div>
+      </div>
+
+      <!-- Controls & Filter Bar -->
+      <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-4 shadow-xl">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <!-- Search input -->
+          <div class="relative flex-1">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm theo tên đối tác, loại sản phẩm, metric hoặc nguồn..." class="w-full pl-10 pr-4 py-2.5 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+            <svg class="w-5 h-5 text-slate-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Industry Filter Badges -->
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-700/60 text-xs">
+          <span class="text-slate-400 font-semibold mr-1">Lĩnh vực:</span>
+          <button data-filter="all" class="filter-btn active-filter px-3 py-1.5 rounded-lg font-medium bg-indigo-600 text-white transition-all">Tất cả</button>
+          <button data-filter="e-commerce" class="filter-btn px-3 py-1.5 rounded-lg font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-all">E-commerce / Retail</button>
+          <button data-filter="travel" class="filter-btn px-3 py-1.5 rounded-lg font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-all">Hàng không / Du lịch</button>
+          <button data-filter="fintech" class="filter-btn px-3 py-1.5 rounded-lg font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-all">Fintech / Super App / Bank</button>
+          <button data-filter="proptech" class="filter-btn px-3 py-1.5 rounded-lg font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-all">Bất động sản / Proptech</button>
+          <button data-filter="auto" class="filter-btn px-3 py-1.5 rounded-lg font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-all">Ô tô / Xe máy</button>
+          <button data-filter="saas" class="filter-btn px-3 py-1.5 rounded-lg font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-all">SaaS / Payroll</button>
+          <button data-filter="events" class="filter-btn px-3 py-1.5 rounded-lg font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-all">Thể thao / Sự kiện</button>
+        </div>
+      </div>
+
+      <!-- Data Table -->
+      <div class="bg-slate-800/60 border border-slate-700 rounded-xl overflow-hidden shadow-2xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm text-slate-300">
+            <thead class="bg-slate-800 text-slate-200 text-xs uppercase tracking-wider font-semibold border-b border-slate-700 sticky top-14 z-30">
+              <tr>
+                <th scope="col" class="py-3.5 px-4 w-12 text-center">#</th>
+                <th scope="col" class="py-3.5 px-4 min-w-[180px]">Case / Nền Tảng</th>
+                <th scope="col" class="py-3.5 px-4 min-w-[140px]">Lĩnh Vực</th>
+                <th scope="col" class="py-3.5 px-4 min-w-[160px]">Sản Phẩm Nhúng</th>
+                <th scope="col" class="py-3.5 px-4 min-w-[150px]">Điểm Nhúng (Touchpoint)</th>
+                <th scope="col" class="py-3.5 px-4 min-w-[220px]">Metric Công Bố</th>
+                <th scope="col" class="py-3.5 px-4 min-w-[130px]">Loại Metric</th>
+                <th scope="col" class="py-3.5 px-4 min-w-[180px]">Luồng Doanh Thu</th>
+                <th scope="col" class="py-3.5 px-4 min-w-[160px]">Nguồn (Source Link)</th>
+              </tr>
+            </thead>
+            <tbody id="caseTableBody" class="divide-y divide-slate-700/60 font-normal">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SECTION 2: REVENUE MODELS -->
+    <section id="revenue-models" class="space-y-6">
+      <div class="border-b border-slate-800 pb-4">
+        <h3 class="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+          <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Các Mẫu Doanh Thu Phổ Biến Trong Embedded Insurance
+        </h3>
+        <p class="text-sm text-slate-400 mt-1">Phân tích cách vận hành và độ phù hợp của 6 mô hình kinh doanh phổ biến trên thị trường.</p>
+      </div>
+
+      <div id="revenueGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+
+    <!-- SECTION 3: CRITICAL INSIGHTS -->
+    <section id="critical-insights" class="space-y-6">
+      <div class="border-b border-slate-800 pb-4">
+        <h3 class="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+          <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Nhận Định Phản Biện & Bài Học Rút Ra
+        </h3>
+        <p class="text-sm text-slate-400 mt-1">Những nguyên lý cốt lõi rút ra từ 63 case study giúp tránh các sai lầm tốn kém.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-800/80 border-l-4 border-indigo-500 border-y border-r border-slate-700/80 p-6 rounded-r-xl shadow-lg space-y-2">
+          <div class="flex items-center space-x-2 text-indigo-400 font-bold text-sm uppercase">
+            <span>01</span>
+            <span>Trùng khớp rủi ro & hành vi</span>
+          </div>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Số conversion cao không đến từ "bảo hiểm hay", mà đến từ sự trùng khớp hoàn hảo giữa <strong class="text-white">rủi ro đang diễn ra</strong> và <strong class="text-white">hành vi thanh toán</strong>. Ví dụ: Bảo vệ sản phẩm tại checkout thiết bị, Renters insurance trong onboarding thuê nhà, Ticket protection lúc đặt vé.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/80 border-l-4 border-blue-500 border-y border-r border-slate-700/80 p-6 rounded-r-xl shadow-lg space-y-2">
+          <div class="flex items-center space-x-2 text-blue-400 font-bold text-sm uppercase">
+            <span>02</span>
+            <span>Ngân hàng & Neobank Blend</span>
+          </div>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Case ngân hàng/neobank có số liệu về adoption & policy volume rất lớn nhưng ít báo cáo conversion mua lẻ. Lý do: Ngân hàng thường nhúng bảo hiểm làm <strong class="text-white">giá trị gia tăng trong các gói thẻ/subscription trả phí</strong> (như Revolut, Monese, Nubank).
+          </p>
+        </div>
+
+        <div class="bg-slate-800/80 border-l-4 border-amber-500 border-y border-r border-slate-700/80 p-6 rounded-r-xl shadow-lg space-y-2">
+          <div class="flex items-center space-x-2 text-amber-400 font-bold text-sm uppercase">
+            <span>03</span>
+            <span>Bẫy Unit Economics Micro-Insurance</span>
+          </div>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Micro-insurance có thể đạt hàng chục triệu policy nhưng phí cực nhỏ, margin mỏng và claim cost cao nếu định phí lỗi. Các case như Grab Ride Cover hay GCash bill protection đáng học về UX & Distribution, nhưng cần <strong class="text-white">kiểm soát chi phí bồi thường nghiêm ngặt</strong>.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/80 border-l-4 border-rose-500 border-y border-r border-slate-700/80 p-6 rounded-r-xl shadow-lg space-y-2">
+          <div class="flex items-center space-x-2 text-rose-400 font-bold text-sm uppercase">
+            <span>04</span>
+            <span>Bài học thất bại Qover/Toyota GAP</span>
+          </div>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Case Toyota GAP motor (17.000 quotes chỉ ra 8 policy) cho thấy embedded <strong class="text-white">không tự động thắng</strong>. Nếu sản phẩm sai thời điểm, quá phức tạp hoặc giá không hợp lý, dù traffic nền tảng cực lớn cũng không thể tạo chuyển đổi.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SECTION 4: VIETNAM ROADMAP -->
+    <section id="vietnam-roadmap" class="space-y-6">
+      <div class="border-b border-slate-800 pb-4">
+        <h3 class="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+          <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+          </svg>
+          Gợi Ý Áp Dụng Cho Ngân Hàng & FinTech Tại Việt Nam
+        </h3>
+        <p class="text-sm text-slate-400 mt-1">Lộ trình ưu tiên 8 sản phẩm bảo hiểm nhúng giàu tiềm năng nhất cho thị trường Việt Nam.</p>
+      </div>
+
+      <div id="vnRoadmapGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+
+    <!-- SECTION 5: MARKET REPORTS & REFERENCES -->
+    <section class="bg-slate-800/40 border border-slate-700/60 rounded-xl p-6 sm:p-8 space-y-4">
+      <h3 class="text-xl font-bold text-white">Nguồn Báo Cáo & Benchmark Thị Trường</h3>
+      <ul class="space-y-3 text-sm text-slate-300">
+        <li class="flex items-start gap-2">
+          <svg class="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          <span><strong>Deloitte Global Report:</strong> Dự báo Embedded Insurance P&C đạt USD 70 tỷ tại Mỹ và USD 700 tỷ toàn cầu vào năm 2030. <a href="https://www2.deloitte.com/us/en/insights/industry/financial-services/financial-services-industry-predictions/2023/embedded-insurance.html" target="_blank" class="text-indigo-400 hover:underline">Xem báo cáo Deloitte ↗</a></span>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg class="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          <span><strong>BCG Tech Framework:</strong> Nhấn mạnh bảo hiểm nhúng giúp nâng cao attach rate & margin so với kênh truyền thống khi chọn đúng Operating Model. <a href="https://www.bcg.com/publications/2025/building-tech-framework-for-embedded-insurance" target="_blank" class="text-indigo-400 hover:underline">Xem bài phân tích BCG ↗</a></span>
+        </li>
+        <li class="flex items-start gap-2">
+          <svg class="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          <span><strong>Cover Genius Retail & Travel Insights:</strong> 60.1% người tiêu dùng sẵn sàng mua bảo vệ sản phẩm trực tiếp tại checkout e-commerce. <a href="https://covergenius.com/resources/reports/embedded-insurance-retail/" target="_blank" class="text-indigo-400 hover:underline">Xem báo cáo Cover Genius Retail ↗</a> | <a href="https://covergenius.com/resources/reports/embedded-insurance-travel-global/" target="_blank" class="text-indigo-400 hover:underline">Xem báo cáo Travel ↗</a></span>
+        </li>
+      </ul>
+    </section>
+
   </main>
 
-  <footer class="max-w-7xl mx-auto px-4 py-6 text-center text-xs text-gray-500">
-    <p>Báo cáo Case Study Bảo Hiểm Nhúng Toàn Cầu — Cập nhật 19/08/2026</p>
+  <footer class="border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500">
+    <p>Báo Cáo Benchmark & Case Study Bảo Hiểm Nhúng Toàn Cầu — Cập nhật 19/08/2026</p>
+    <p class="mt-1">Phát triển & Tổng hợp dữ liệu phục vụ nghiên cứu chiến lược Fintech & InsurTech Việt Nam</p>
   </footer>
 
-  <script id="raw-markdown" type="text/markdown"># Case Study Bảo Hiểm Nhúng Toàn Cầu
-
-> Cập nhật: 19/08/2026.  
-> Lưu ý đọc số liệu: nhiều case công bố bởi insurtech/vendor, chưa phải báo cáo kiểm toán độc lập. Tôi phân biệt rõ `attach/conversion tuyệt đối`, `uplift`, và `proxy` như doanh thu, số policy, GWP.
-
-## Tóm Tắt Nhanh
-
-- Embedded insurance hoạt động tốt nhất khi bảo hiểm được nhúng đúng "khoảnh khắc rủi ro": mua vé, đặt chuyến, thuê nhà, mua thiết bị, thanh toán hóa đơn, vay/mua xe, đăng ký lao động/gig.
-- Các tỷ lệ chuyển đổi cao nhất thường nằm ở nhóm:
-  - bảo vệ sản phẩm/thiết bị tại checkout e-commerce,
-  - bảo hiểm thuê nhà/deposit trong onboarding bất động sản,
-  - bảo hiểm sự kiện/thể thao khi người dùng đang đăng ký hoạt động,
-  - micro-insurance trong ví điện tử/super app.
-- Với ngân hàng tại Việt Nam, nên ưu tiên sản phẩm đơn giản, phí thấp, quyền lợi dễ hiểu, claim nhanh, opt-in minh bạch. Tránh mọi cảm giác "ép mua kèm" vì rủi ro pháp lý và niềm tin.
-
-## Bảng Case Study Có Số Liệu
-
-| # | Case / Nền tảng | Lĩnh vực nền tảng | Sản phẩm bảo hiểm nhúng | Điểm nhúng | Metric công bố | Loại metric | Luồng doanh thu | Nguồn |
-|---:|---|---|---|---|---|---|---|---|
-| 1 | eBay + Cover Genius | Marketplace / e-commerce | Product protection / warranty | Add-on tại checkout | Tăng 513% doanh số bảo vệ add-on trong 4 tuần | Sales uplift | Phí bảo hiểm, hoa hồng/commission hoặc revenue share | [Cover Genius - eBay](https://covergenius.com/resources/case-study/ebay-demo/) |
-| 2 | AXS + Cover Genius | Ticketing / live events | Ticket protection | Checkout mua vé | Attach rate tăng 200%; yield gấp 3 lần; yield tăng thêm 78% sau 14 tuần | Attach/yield uplift | Phí bảo hiểm, revenue share theo policy | [Cover Genius - AXS dynamic pricing](https://covergenius.com/resources/case-study/dynamic-pricing-ticket-revenue-case-study/) |
-| 3 | Turkish Airlines + Cover Genius | Hàng không / du lịch | Travel protection | Booking flow | GWP organic tăng 3 lần; Protection NPS tăng 37%; triển khai 57 quốc gia | GWP/NPS uplift | Phí bảo hiểm trong booking, revenue share | [Cover Genius - Travel](https://covergenius.com/industries/travel/) |
-| 4 | Ryanair + Cover Genius | Hàng không / du lịch | Travel protection | Booking flow | Báo cáo nhu cầu: 42% khách EMEA thích mua từ nhà cung cấp du lịch; 71% sẽ mua lại từ nhà cung cấp du lịch | Survey intent | Phí bảo hiểm trong booking, revenue share | [Cover Genius - Ryanair](https://covergenius.com/company/news/ryanair-partners-with-cover-genius/) |
-| 5 | Igloo với Lazada/Shopee/Bukalapak | E-commerce Đông Nam Á | Product protection, logistics/parcel, phone screen | Checkout hoặc post-purchase | Khoảng 10% conversion với opt-out embeds; tăng khoảng 6% CLTV; hơn 30.400 policy/tháng | Conversion/proxy | Phí bảo hiểm nhỏ trên từng đơn, commission/revenue share | [Igloo - E-commerce](https://iglooinsure.com/industry/e-commerce/) |
-| 6 | Shopee + Igloo | E-commerce | Bảo hiểm màn hình/điện thoại | Cross-sell trong app; kích hoạt bằng ảnh | Kích hoạt khoảng 30 giây; image detection 80-90%; case nhấn mạnh tăng LTV và margin dương | Ops/proxy | Phí bảo hiểm, chia sẻ doanh thu với marketplace | [Igloo - Shopee case](https://iglooinsure.com/case-study/shopee-increases-lifetime-value-cross-selling/) |
-| 7 | Gojek GoSure | Super app / mobility / fintech | Travel, trip, device, personal accident, gadget | Trong app Gojek | Tổng doanh số GoSure tăng 60 lần từ giai đoạn thử nghiệm | Sales uplift | Phí micro-insurance, commission/revenue share | [Gojek - GoSure](https://www.gojek.com/blog/gojek/asuransi-gosure) |
-| 8 | Gojek GoBox | Logistics / moving | Bảo hiểm hàng hóa vận chuyển | Booking GoBox | Miễn phí đến Rp10M; upsell gói đến Rp1B có phí | Product economics/proxy | Freemium coverage + upsell phí bảo hiểm | [Gojek - GoBox insurance](https://www.gojek.com/blog/gobox/asuransi-layanan-gobox) |
-| 9 | Grab Ride Cover | Super app / ride-hailing | Bảo hiểm trễ/hủy chuyến, tai nạn chuyến đi | Toggle/opt-in trong Grab | Phí S$0,30-0,35/chuyến; live ở 8 thị trường; hàng triệu chuyến được bảo vệ | Adoption/proxy | Micro-premium theo chuyến; partner commission | [International Insurance Society - Grab](https://internationalinsurance.org/leaders_of_tomorrow_bridging_the_protection_gap_with_embedded_insurance_and_superapps), [Chubb Studio Connect](https://studio.chubb.com/connect/partners) |
-| 10 | Grab Financial Group | Super app / fintech | Micro critical illness, income protection | Trong app Grab cho driver/người dùng | 130 triệu micro policies; GWP tăng gấp 3 | Volume/GWP proxy | Phí nhỏ theo sản phẩm, cross-sell sang gói lớn hơn | [Asia InsurTech Podcast - Grab](https://asiainsurtechpodcast.com/ep-132-tom-duncan-md-insurance-and-wealth-grab-financial-group-what-are-the-metrics-you-manage-to/) |
-| 11 | Revolut + Qover | Neobank / fintech | Purchase protection, refund, ticket cancellation, travel CFAR | Bundle trong Plus/Premium/Metal/Ultra | Thời gian xử lý claim giảm 75%; triển khai 30+ nước châu Âu | Ops/NPS proxy | Bảo hiểm làm tăng giá trị subscription; phí nằm trong gói trả tiền | [Qover - Revolut](https://www.qover.com/case-studies/embedded-insurance-supporting-revolut-clients-in-their-everyday-lives) |
-| 12 | Monese + Qover | Neobank / fintech | Bills protection, purchase protection | Trong gói Classic/Premium | Không công bố conversion; dùng bảo hiểm để tăng giá trị gói trả phí | Product proxy | Subscription banking bundle | [Qover - Monese](https://www.qover.com/case-study/money-app-monese-offers-consumers-embedded-insurance-products) |
-| 13 | Nubank + Chubb | Neobank / fintech | Life/accident/embedded protection | Trong app ngân hàng số | 150.000 policy trong 30 ngày; nguồn khác ghi 900.000+ policy sau 1,5 năm, NPS 85 | Policy volume/NPS | Phí bảo hiểm, commission/revenue share | [Chubb Partners](https://www.chubb.com/us-en/partners.html), [Chubb Studio Connect](https://studio.chubb.com/connect/partners) |
-| 14 | GCash + Chubb | E-wallet / payments | Bill protection | Luồng thanh toán hóa đơn | Phí động khoảng 1% giá trị hóa đơn | Pricing model/proxy | Micro-premium tính theo bill, revenue share | [Chubb Studio Connect](https://studio.chubb.com/connect/partners) |
-| 15 | JKOPay + bolttech | E-wallet / payments | Insurance marketplace / embedded offers | Trong ví điện tử | Hơn 1 triệu lượt visit trong 6 tháng; 46% conversion của registered users; giao dịch khoảng 3 phút; conversion 2-3 lần peer | Conversion | Phí bảo hiểm, commission/revenue share | [bolttech - JKOPay](https://bolttech.io/case-studies/jkopay-case-study/) |
-| 16 | Financial services partner + bolttech | Ngân hàng/tài chính | Embedded protection products | Digital flow của tổ chức tài chính | Doanh thu tăng 75%; conversion tăng 135%; NPS tăng 80%; quoted premium tăng 100% | Revenue/conversion/NPS uplift | Commission, revenue share, lead-to-policy | [bolttech - Financial services](https://bolttech.io/case-studies/financial-services-case-study/) |
-| 17 | Global bank/telco examples + Chubb | Bank / telco / fintech | Account protection, home, bill, ride, device | App hoặc checkout của partner | Chubb xử lý 2,5 tỷ API calls/năm; 98,5% quote embedded trả dưới 1 giây | Platform capability/proxy | API embedded, premium + commission | [Chubb Partners](https://www.chubb.com/us-en/partners.html) |
-| 18 | Digital bank customer research + Cover Genius | Banking / fintech | Embedded insurance qua bank/fintech | Trong app ngân hàng, BNPL, accounting, wallet | 70% khách digital bank quan tâm; hơn 85% khách BNPL ở nhiều nước quan tâm; accounting software users hơn 90%; wallet 75% | Survey intent | Cross-sell insurance | [Cover Genius - Banking report](https://covergenius.com/resources/reports/embedded-insurance-global-report/) |
-| 19 | US bank customers + Cover Genius | Banking Mỹ | Purchase/event/travel/device protection | Trong app ngân hàng | 45% khách Mỹ rất quan tâm; digital bank 70%; major purchase/event 56% vs 27% | Survey intent | Bank commission/revenue share | [Cover Genius - US report](https://covergenius.com/resources/reports/embedded-insurance-report-us/) |
-| 20 | Polly auto dealer network | Auto retail / dealership fintech | Auto insurance quote/bind | Trong quy trình mua xe/F&I | Khi shopper thấy quote: F&I gross +20% / +$313 mỗi deal; khi mua policy: +31% / +$501; top dealers hơn 40% | Revenue uplift / dealer performance | Commission referral, insurance sale at dealership | [Polly Q2 2025](https://www.polly.co/quarterly-report-q2-2025) |
-| 21 | Polly auto dealer network Q1 | Auto retail / dealership fintech | Auto insurance | F&I checkout mua xe | F&I gross +21% khi quote hiển thị; +28% / +$432 khi policy được mua | Revenue uplift | Commission/referral | [Polly Q1 2025](https://www.polly.co/newsletter/q1-2025-report-how-auto-insurance-is-becoming-a-dealer-profit-driver) |
-| 22 | Marsh Affinity mobility warranty | Automotive / mobility | Extended warranty | Trong quy trình bán/servicing xe | 150.000 hợp đồng, 50.000 claim phân tích; 80% claim tự động duyệt; claim từ vài ngày xuống vài giây | Ops/scale proxy | Premium + service/administrator margin | [Marsh - Mobility embedded insurance](https://www.marsh.com/en/services/affinity/insights/embedded-insurance-future-mobility-sector1.html) |
-| 23 | Tesla Insurance | EV / connected car | Auto insurance realtime | Tesla app; premium theo Safety Score, mileage, FSD | Không công bố conversion; phí cá nhân hóa theo hành vi lái xe | Pricing model/proxy | Premium trực tiếp từ khách hàng | [Tesla - Real-time insurance](https://www.tesla.com/support/insurance/tesla-real-time-insurance) |
-| 24 | Tesla FSD discount | EV / connected car | Auto insurance discount | Tesla insurance pricing | Giảm tối đa 10% trên một số coverage khi dùng FSD Supervised | Pricing incentive | Premium trực tiếp, giữ chân hệ sinh thái | [Tesla - FSD insurance](https://www.tesla.com/support/insurance/fsd) |
-| 25 | Immoweb + Qover | Real estate marketplace | Home/rent protection | Trong journey tìm thuê/mua nhà | 3,7 triệu unique visitors/tháng; 20.000 users/tháng cho Immoweb Protect; launch 4 tháng | User volume/proxy | Compensation per insurance contract sold | [Qover - Immoweb](https://www.qover.com/case-studies/immoweb-insurance-qover-create-value-revenue) |
-| 26 | Rhino + Cover Genius | Rental / proptech | Renters insurance | One-touch trong rental flow | Mua bảo hiểm dưới 1 phút | UX/proxy | Premium + commission | [Cover Genius - Rhino](https://covergenius.com/resources/case-study/rhino-demo/) |
-| 27 | Rhino + Haley Residential | Property management | Security deposit insurance | Tenant onboarding | 11.000 units trong 3 tháng; 2/3 renters enroll; bad debt giảm 3 lần | Enrollment/ops | Premium thay thế tiền cọc; partner revenue/fee | [Rhino - Haley Residential](https://www.sayrhino.com/blog/posts/haley-residential) |
-| 28 | Rhino owner/operator data | Property management | Security deposit insurance | Leasing flow | 80% renters nhận quote Rhino thì enroll; chi phí move-in upfront giảm 90%; claim trung bình trả 4 ngày | Enrollment/claim speed | Premium/fee model | [Rhino - Benefits](https://www.sayrhino.com/blog/posts/benefits-of-security-deposit-insurance-for-owners-and-operators) |
-| 29 | Alcove + Sure | Rental / roommate housing | Renters insurance | Required renters insurance flow | Conversion cao hơn benchmark 30%; quote initiation +18%; launch dưới 1 tháng | Conversion uplift | Premium + commission | [Sure - Alcove](https://www.sureapp.com/newsroom/alcove-case-study) |
-| 30 | TurboTenant + Sure | Rental management SaaS | Renters insurance | API embedded trong tenant flow | Conversion tăng 29% trong tuần đầu sau API release | Conversion uplift | Premium + commission | [Sure - TurboTenant](https://www.sureapp.com/newsroom/turbotenant-case-study) |
-| 31 | Common + Sure | Co-living / property management | Renters insurance | Tenant onboarding | 67% tenant mới chọn renters insurance trong onboarding | Attach/conversion | Premium + commission | [Sure - Common](https://www.sureapp.com/newsroom/press-release-sure-and-common-join-forces-to-create-a-scalable-embedded-insurance-experience-for-residents) |
-| 32 | Regional property manager + Sure Verify | Property management | Renters insurance compliance | Verification/insurance compliance workflow | Compliance 97% so với industry standard khoảng 50% | Compliance proxy | Verification + policy funnel | [Sure - Verify case](https://www.sureapp.com/newsroom/regional-property-management-firm-case-study) |
-| 33 | Moved + REIN | Moving / relocation marketplace | Renters, auto, pet insurance | Trong move journey | 56,6% conversion; premium growth 15 lần; commission +383% | Conversion/revenue | Commission/revenue share | [REIN case examples](https://reinai.lovable.app/) |
-| 34 | Ryder + REIN | Truck rental / logistics | Embedded rental/truck protection | Trong rental flow | Bound policies +767%; bind rate tăng 5 lần; premium +130% | Policy/conversion/revenue uplift | Premium + commission | [REIN case examples](https://reinai.lovable.app/) |
-| 35 | NEXT + online payroll provider | Payroll SaaS / SMB software | Workers compensation | Payroll setup/compliance flow | Digital workers comp sales +70%; revenue +45%; sau 1 năm sales số +247%, revenue số +370%, premium/sale +35% | Sales/revenue uplift | Commission/revenue share; compliance cross-sell | [NEXT - Payroll case](https://www.nextinsurance.com/become-a-partner/payroll-case-study/) |
-| 36 | Gusto + NEXT | Payroll SaaS / SMB | Workers compensation | Embedded payroll workflow | Không công bố conversion; case nhấn mạnh trải nghiệm embedded payroll | Product proxy | Commission/revenue share | [NEXT + Gusto](https://www.nextinsurance.com/blog/next-insurance-and-gusto-expand-partnership-to-modernize-embedded-payroll-experience/) |
-| 37 | QuickBooks / Intuit + NEXT | Accounting / SMB finance | Business insurance | QuickBooks ecosystem | Không công bố conversion; nhúng NEXT Connect trong hệ sinh thái QuickBooks | Product proxy | Commission/revenue share | [NEXT - QuickBooks](https://www.nextinsurance.com/blog/next-launches-its-embedded-solution-next-connect-within-intuits-quickbooks-ecosystem/) |
-| 38 | Deliveroo + Qover | Gig economy / food delivery | Rider accident/income protection | Rider platform | 45.000 riders covered; 90% satisfaction | Adoption/NPS proxy | Platform-funded benefit hoặc insurer partnership | [Qover - Deliveroo](https://www.qover.com/case-studies/deliveroo-protecting-gig-workers-and-attracting-new-talent-with-insurance) |
-| 39 | Canyon + Qover | Direct-to-consumer bikes/e-bike | Bike/e-bike insurance | Checkout xe đạp | Không công bố conversion; mục tiêu kéo dài quan hệ sau bán | Product proxy | Premium add-on, revenue share | [Qover - Canyon](https://www.qover.com/case-studies/embedded-bike-insurance-canyon-customer-relationship) |
-| 40 | Glamnetic + Extend | DTC beauty/e-commerce | Shipping protection | Checkout | 68% attach; +6% sitewide conversion; $100.000 sales trong 6 tháng | Attach/conversion/revenue | Fee shipping protection, merchant margin/revenue share | [Extend - Glamnetic](https://www.extend.com/merchant-case-studies/glamnetic-shipping-protection) |
-| 41 | My Trio Rings + Extend | Jewelry e-commerce | Product protection | Checkout | 32% attach; conversion YoY +10,56%; AOV +15,3% | Attach/conversion/AOV | Protection plan revenue | [Extend - My Trio Rings](https://www.extend.com/merchant-case-studies/my-trio-rings) |
-| 42 | BlendJet + Extend | Consumer electronics / DTC | Product protection | Checkout | 11,4% attach; 11% sitewide sales conversion; $500.000 protection sales | Attach/sales | Protection plan revenue | [Extend - BlendJet](https://www.extend.com/merchant-case-studies/blendjet) |
-| 43 | Felix Gray + Extend | Eyewear e-commerce | Product protection | Checkout + abandoned cart email | Attach tăng 200%, từ 2-3% lên 8-9%; overall attach 19,3%; abandoned cart email conversion +250-300%; product page conversion 9,7% vs site 2,4% | Attach/conversion uplift | Protection plan revenue | [Extend - Felix Gray](https://www.extend.com/merchant-case-studies/felix-gray) |
-| 44 | Baby Brezza + Extend | Baby products e-commerce | Product protection | Checkout | 8,8% attach; AOV +15% | Attach/AOV | Protection plan revenue | [Extend - Baby Brezza](https://www.extend.com/merchant-case-studies/baby-brezza) |
-| 45 | 1MORE + Extend | Audio electronics e-commerce | Product protection | Checkout | 14,6% attach; revenue +2,3% | Attach/revenue | Protection plan revenue | [Extend - 1MORE](https://www.extend.com/merchant-case-studies/1more) |
-| 46 | Visionworks + Extend | Optical retail / omnichannel | Product protection | POS / retail associate flow | Attach gấp 3 lần legacy provider; 4.473 associates trained | Attach uplift | Protection plan revenue | [Extend - Visionworks](https://www.extend.com/merchant-case-studies/visionworks-drives-3x-product-protection-plan-attachment) |
-| 47 | SoClean + Extend | Health/device DTC | Product protection | Checkout | 20,1% attach; attach +109%; revenue +167% | Attach/revenue uplift | Protection plan revenue | [Extend - SoClean](https://www.extend.com/merchant-case-studies/soclean) |
-| 48 | Bear Mattress + Extend | Mattress e-commerce | Product protection | Checkout | 16% attach | Attach | Protection plan revenue | [Extend - Bear Mattress](https://www.extend.com/merchant-case-studies/bear) |
-| 49 | The Dufresne Group + Extend | Furniture retail | Product protection | Omnichannel / store | 40% attach; warrantable products +28%; 53 stores onboarded | Attach/adoption | Protection plan revenue | [Extend - Dufresne](https://www.extend.com/merchant-case-studies/the-dufresne-group-canada) |
-| 50 | Voro Motors + Extend | E-scooter / micromobility retail | Product protection | Checkout | Attach +205%, từ 16% lên 49%; contract sales +447%; revenue +261% | Attach/revenue uplift | Protection plan revenue | [Extend - Voro Motors](https://www.extend.com/merchant-case-studies/voro-motors) |
-| 51 | Monster Transmission + Extend | Auto parts e-commerce | Product protection | Checkout + telesales | Conversion +120%; telesales +30-40%; 0 customer pushback | Conversion/sales uplift | Protection plan revenue | [Extend - Monster Transmission](https://www.extend.com/merchant-case-studies/monster-transmission) |
-| 52 | Resident + Extend | Mattress/furniture DTC | Product protection | Checkout | Attach gấp 2 lần provider trước | Attach uplift | Protection plan revenue | [Extend - Resident](https://www.extend.com/merchant-case-studies/resident) |
-| 53 | Assurant retail protection optimization | Retail / e-commerce | Product protection | POS/checkout optimization | Attach +215 bps; category attach +125 bps; protection sales volume +53%; attach +60%, duy trì +40% | Attach/sales uplift | Protection plan revenue | [Assurant - Retail protection](https://www.assurant.com/news-insights/articles/maximize-retail-protection-program-revenue) |
-| 54 | Vertical Insure + WrestlingIQ | Sports registration SaaS | Registration cancellation / participant insurance | Checkout đăng ký giải/lớp | 11,5% combined conversion trong 1 tháng; 2 tuần dev; rollout 100% | Conversion | Marketing payment per policy sold | [Vertical Insure - WrestlingIQ](https://verticalinsure.com/partner-stories/wrestlingiq-taps-into-new-revenue-and-protects-customer-profits-with-embedded-insurance/) |
-| 55 | Vertical Insure + Aktivate | School/youth sports SaaS | Gap medical insurance | Đăng ký hoạt động thể thao | Hơn 5% conversion tháng đầu; rollout 100%; 50 states, 80+ activities; 20h dev | Conversion | Marketing payment / commission | [Vertical Insure - Aktivate](https://verticalinsure.com/partner-stories/aktivate-empowers-more-children-to-participate-in-youth-sports-with-embedded-insurance/) |
-| 56 | Vertical Insure + Goodshuffle | Event rental SaaS | Event host liability | Event rental checkout | Policy purchase conversion +50%; ineligible quote requests -12%; max rented item coverage tăng $10k lên $15k | Conversion/ops uplift | Commission/revenue share | [Vertical Insure - Goodshuffle](https://verticalinsure.com/partner-stories/goodshuffle-event-host-liability/) |
-| 57 | Vertical Insure + Lodgix | Vacation rental SaaS | Travel/vacation rental protection | Booking/rental platform | Launch 3 ngày; có sales sau 1 tuần; portal theo dõi policy sales, conversion, GWP | Speed/proxy | Commission/revenue share | [Vertical Insure - Lodgix](https://verticalinsure.com/partner-stories/lodgix-uses-ai-led-integration/) |
-| 58 | Vertical Insure event category | Event platforms | Event host liability | Event checkout/registration | Average conversion 16% trên trang ngành event | Category benchmark | Commission/revenue share | [Vertical Insure - Events](https://verticalinsure.com/events/) |
-| 59 | Extend benchmark | E-commerce / retail | Extended warranty/product protection | Checkout | Attach 15% so với industry average 5-6%; warranty có thể thêm 10-15% cart value | Benchmark | Protection plan revenue | [Extend - POS financing & warranties](https://www.extend.com/post/point-of-sale-consumer-financing-and-extended-warranties-a-perfect-match) |
-| 60 | Extend omnichannel benchmark | Retail / e-commerce | Product protection | Online + store | Sitewide conversion +11%; attach 12,4%; in-store conversion 3%, $540k monthly sales | Benchmark/case proxy | Protection plan revenue | [Extend - Omnichannel](https://www.extend.com/post/omnichannel-customer-experience-and-product-protection) |
-| 61 | SGS Engineering + Quotall | Tools/equipment e-commerce | Extended warranty / protection | Checkout | Attach đến 20%; basket conversion +3-5%; live 2 tuần | Attach/conversion uplift | Protection plan revenue | [Quotall LinkedIn post](https://www.linkedin.com/posts/quotall_embeddedinsurance-insuranceatcheckout-ecommercerevenue-activity-7445439056173322240-Zd4f) |
-| 62 | Toyota GAP motor attempt + Qover | Automotive finance / dealer | GAP motor insurance | Quote/checkout | 17.000 quotes nhưng chỉ 8 policies | Failure case / conversion rất thấp | Premium/commission không hiệu quả | [Qover - 10 years lessons](https://www.qover.com/blog/10-years-embedded-insurance-scale-lessons) |
-| 63 | Nomad Assistance + Qover | Travel / assistance | Travel assistance insurance | Travel flow | Đạt EUR1M GWP rồi bị COVID làm carrier rút | GWP / risk case | Premium/commission, carrier dependency | [Qover - 10 years lessons](https://www.qover.com/blog/10-years-embedded-insurance-scale-lessons) |
-
-## Các Mẫu Doanh Thu Phổ Biến
-
-| Mẫu doanh thu | Cách hoạt động | Hợp với nền tảng |
-|---|---|---|
-| Commission/revenue share theo policy | Nền tảng nhận % phí hoặc khoản cố định khi policy bán thành công | Marketplace, bank, ví điện tử, booking, ticketing |
-| Embedded subscription bundle | Bảo hiểm nằm trong gói trả phí để tăng ARPU và retention | Neobank, membership, premium card/app |
-| Micro-premium theo giao dịch | Phí rất nhỏ theo chuyến, bill, đơn hàng hoặc lượt đăng ký | Ride-hailing, payment, ticketing, logistics |
-| Freemium + upsell | Tặng coverage cơ bản, bán thêm mức bảo vệ cao hơn | Logistics, bank app, travel, e-commerce |
-| Lead/referral fee | Nền tảng tạo lead đủ điều kiện cho insurer/broker | Auto dealer, SME SaaS, real estate |
-| Risk-funded benefit | Nền tảng tài trợ một phần bảo hiểm để tăng loyalty/retention | Gig platform, premium banking, travel membership |
-
-## Nhận Định Phản Biện
-
-1. Số conversion cao thường không đến từ "bảo hiểm hay", mà đến từ sự trùng khớp giữa rủi ro và hành vi mua. Ví dụ product protection ở checkout thiết bị, renters insurance trong onboarding thuê nhà, ticket protection lúc mua vé.
-
-2. Case ngân hàng/neobank có nhiều số liệu về adoption, policy volume và NPS hơn là conversion tuyệt đối. Lý do: ngân hàng thường nhúng bảo hiểm như một phần của subscription/value-added service, nên conversion bị pha giữa upsell gói tài khoản và purchase bảo hiểm độc lập.
-
-3. Micro-insurance có thể scale mạnh nhưng dễ tạo premium nhỏ, margin mỏng, claim cost cao nếu định phí không tốt. Vì vậy các case như GCash bill protection, Grab Ride Cover, Gojek GoSure đáng học về UX và distribution, nhưng phải kiểm tra unit economics rất kỹ.
-
-4. Bảo hiểm gắn với khoản vay/ngân hàng tại Việt Nam cần cực kỳ thận trọng. Không nên thiết kế luồng tạo cảm giác điều kiện vay/điều kiện giao dịch. Opt-in, giải thích quyền lợi, pricing, hủy gói và claim phải rõ.
-
-5. Failure case Qover/Toyota GAP cho thấy embedded không tự động thắng. 17.000 quotes chỉ ra 8 policies nghĩa là nếu sản phẩm sai thời điểm, sai nhu cầu, sai giá hoặc quá phức tạp, traffic lớn cũng không cứu được conversion.
-
-## Gợi Ý Áp Dụng Cho Việt Nam
-
-| Ưu tiên | Sản phẩm đề xuất | Nền tảng Việt Nam phù hợp | Vì sao đáng thử | Phản biện/rủi ro cần xử lý |
-|---:|---|---|---|---|
-| 1 | Bảo vệ giao dịch / tài khoản số | Mobile banking, ví điện tử | Rủi ro lừa đảo, chuyển nhầm, mất quyền truy cập đang rất "đúng thời điểm" trong app ngân hàng | Phải định nghĩa loại rủi ro được bồi thường cực rõ; nếu claim bị từ chối nhiều sẽ phản tác dụng |
-| 2 | Bill protection | Thanh toán điện/nước/internet/học phí trong bank app | Học từ GCash: premium nhỏ theo hóa đơn, dễ hiểu, dễ thử | Cần tránh biến thành phí vô hình; nên opt-in từng bill hoặc subscription minh bạch |
-| 3 | Purchase protection cho thẻ/debit/credit | Card transaction, QR/VNPay, e-commerce liên kết bank | Gần với hành vi chi tiêu; có thể nâng cấp gói thẻ premium | Phải tránh chồng chéo quyền lợi chargeback/bảo hành của merchant |
-| 4 | Phone screen/device protection | Mobile banking, telco, e-commerce | Việt Nam smartphone-first; phí nhỏ, quyền lợi cụ thể | Fraud risk cao; cần quy trình xác thực thiết bị và ảnh/video trước khi bảo hiểm có hiệu lực |
-| 5 | Travel delay/cancellation | Mua vé máy bay/khách sạn qua bank app, thẻ du lịch | Case travel có nhiều bằng chứng attach tốt sau COVID | Nhu cầu mùa vụ; claim delay cần tự động hóa dữ liệu chuyến bay |
-| 6 | Accident micro-insurance | Chuyển khoản, top-up, payroll, gig payout | Phí thấp dễ thử; phù hợp mass market | Dễ trở thành sản phẩm "mua cho có"; cần claim cực nhanh và quyền lợi dễ nhớ |
-| 7 | SME workers comp / liability | Business banking, payroll, kế toán | Học từ NEXT: đúng lúc doanh nghiệp xử lý lương/compliance | Việt Nam cần mapping đúng quy định lao động, BHXH và bảo hiểm thương mại |
-| 8 | Auto insurance at loan/vehicle journey | Auto loan, app ngân hàng, showroom liên kết | Học từ Polly: mua xe là khoảnh khắc mạnh để quote bảo hiểm | Cần tách khỏi điều kiện vay; minh bạch nhiều nhà bảo hiểm/giá để tránh cảm giác ép mua |
-
-## Nguồn Tổng Quan Thị Trường
-
-- Deloitte dự báo embedded insurance P&C có thể đạt khoảng USD70B tại Mỹ và USD700B toàn cầu vào 2030: [Deloitte - Embedded insurance](https://www2.deloitte.com/us/en/insights/industry/financial-services/financial-services-industry-predictions/2023/embedded-insurance.html)
-- BCG nhấn mạnh embedded insurance có thể tạo attach rate và margin tốt hơn phân phối truyền thống nếu chọn đúng platform, data và operating model: [BCG - Embedded insurance tech framework](https://www.bcg.com/publications/2025/building-tech-framework-for-embedded-insurance)
-- Cover Genius khảo sát retail: 60,1% người tiêu dùng sẽ mua insurance/warranty từ e-commerce retailer tại checkout; 86,7% người được offer bảo hiểm khi mua xe đã mua; jewelry 48,1%: [Cover Genius - Retail report](https://covergenius.com/resources/reports/embedded-insurance-retail/)
-- Cover Genius travel report: attach trong travel tăng mạnh sau COVID, và người dùng muốn mua bảo hiểm ngay trong nền tảng đặt chuyến: [Cover Genius - Travel report](https://covergenius.com/resources/reports/embedded-insurance-travel-global/)
-</script>
-
+  <!-- DATA & SCRIPTS -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const rawMarkdown = document.getElementById("raw-markdown").textContent;
-      const contentDiv = document.getElementById("content");
-      contentDiv.innerHTML = marked.parse(rawMarkdown);
+    const cases = [{"id": 1, "case": "eBay + Cover Genius", "industry": "Marketplace / e-commerce", "product": "Product protection / warranty", "touchpoint": "Add-on tại checkout", "metric": "Tăng 513% doanh số bảo vệ add-on trong 4 tuần", "metric_type": "Sales uplift", "revenue_model": "Phí bảo hiểm, hoa hồng/commission hoặc revenue share", "source_title": "Cover Genius - eBay", "source_url": "https://covergenius.com/resources/case-study/ebay-demo/"}, {"id": 2, "case": "AXS + Cover Genius", "industry": "Ticketing / live events", "product": "Ticket protection", "touchpoint": "Checkout mua vé", "metric": "Attach rate tăng 200%; yield gấp 3 lần; yield tăng thêm 78% sau 14 tuần", "metric_type": "Attach/yield uplift", "revenue_model": "Phí bảo hiểm, revenue share theo policy", "source_title": "Cover Genius - AXS dynamic pricing", "source_url": "https://covergenius.com/resources/case-study/dynamic-pricing-ticket-revenue-case-study/"}, {"id": 3, "case": "Turkish Airlines + Cover Genius", "industry": "Hàng không / du lịch", "product": "Travel protection", "touchpoint": "Booking flow", "metric": "GWP organic tăng 3 lần; Protection NPS tăng 37%; triển khai 57 quốc gia", "metric_type": "GWP/NPS uplift", "revenue_model": "Phí bảo hiểm trong booking, revenue share", "source_title": "Cover Genius - Travel", "source_url": "https://covergenius.com/industries/travel/"}, {"id": 4, "case": "Ryanair + Cover Genius", "industry": "Hàng không / du lịch", "product": "Travel protection", "touchpoint": "Booking flow", "metric": "Báo cáo nhu cầu: 42% khách EMEA thích mua từ nhà cung cấp du lịch; 71% sẽ mua lại từ nhà cung cấp du lịch", "metric_type": "Survey intent", "revenue_model": "Phí bảo hiểm trong booking, revenue share", "source_title": "Cover Genius - Ryanair", "source_url": "https://covergenius.com/company/news/ryanair-partners-with-cover-genius/"}, {"id": 5, "case": "Igloo với Lazada/Shopee/Bukalapak", "industry": "E-commerce Đông Nam Á", "product": "Product protection, logistics/parcel, phone screen", "touchpoint": "Checkout hoặc post-purchase", "metric": "Khoảng 10% conversion với opt-out embeds; tăng khoảng 6% CLTV; hơn 30.400 policy/tháng", "metric_type": "Conversion/proxy", "revenue_model": "Phí bảo hiểm nhỏ trên từng đơn, commission/revenue share", "source_title": "Igloo - E-commerce", "source_url": "https://iglooinsure.com/industry/e-commerce/"}, {"id": 6, "case": "Shopee + Igloo", "industry": "E-commerce", "product": "Bảo hiểm màn hình/điện thoại", "touchpoint": "Cross-sell trong app; kích hoạt bằng ảnh", "metric": "Kích hoạt khoảng 30 giây; image detection 80-90%; case nhấn mạnh tăng LTV và margin dương", "metric_type": "Ops/proxy", "revenue_model": "Phí bảo hiểm, chia sẻ doanh thu với marketplace", "source_title": "Igloo - Shopee case", "source_url": "https://iglooinsure.com/case-study/shopee-increases-lifetime-value-cross-selling/"}, {"id": 7, "case": "Gojek GoSure", "industry": "Super app / mobility / fintech", "product": "Travel, trip, device, personal accident, gadget", "touchpoint": "Trong app Gojek", "metric": "Tổng doanh số GoSure tăng 60 lần từ giai đoạn thử nghiệm", "metric_type": "Sales uplift", "revenue_model": "Phí micro-insurance, commission/revenue share", "source_title": "Gojek - GoSure", "source_url": "https://www.gojek.com/blog/gojek/asuransi-gosure"}, {"id": 8, "case": "Gojek GoBox", "industry": "Logistics / moving", "product": "Bảo hiểm hàng hóa vận chuyển", "touchpoint": "Booking GoBox", "metric": "Miễn phí đến Rp10M; upsell gói đến Rp1B có phí", "metric_type": "Product economics/proxy", "revenue_model": "Freemium coverage + upsell phí bảo hiểm", "source_title": "Gojek - GoBox insurance", "source_url": "https://www.gojek.com/blog/gobox/asuransi-layanan-gobox"}, {"id": 9, "case": "Grab Ride Cover", "industry": "Super app / ride-hailing", "product": "Bảo hiểm trễ/hủy chuyến, tai nạn chuyến đi", "touchpoint": "Toggle/opt-in trong Grab", "metric": "Phí S$0,30-0,35/chuyến; live ở 8 thị trường; hàng triệu chuyến được bảo vệ", "metric_type": "Adoption/proxy", "revenue_model": "Micro-premium theo chuyến; partner commission", "source_title": "International Insurance Society - Grab", "source_url": "https://internationalinsurance.org/leaders_of_tomorrow_bridging_the_protection_gap_with_embedded_insurance_and_superapps"}, {"id": 10, "case": "Grab Financial Group", "industry": "Super app / fintech", "product": "Micro critical illness, income protection", "touchpoint": "Trong app Grab cho driver/người dùng", "metric": "130 triệu micro policies; GWP tăng gấp 3", "metric_type": "Volume/GWP proxy", "revenue_model": "Phí nhỏ theo sản phẩm, cross-sell sang gói lớn hơn", "source_title": "Asia InsurTech Podcast - Grab", "source_url": "https://asiainsurtechpodcast.com/ep-132-tom-duncan-md-insurance-and-wealth-grab-financial-group-what-are-the-metrics-you-manage-to/"}, {"id": 11, "case": "Revolut + Qover", "industry": "Neobank / fintech", "product": "Purchase protection, refund, ticket cancellation, travel CFAR", "touchpoint": "Bundle trong Plus/Premium/Metal/Ultra", "metric": "Thời gian xử lý claim giảm 75%; triển khai 30+ nước châu Âu", "metric_type": "Ops/NPS proxy", "revenue_model": "Bảo hiểm làm tăng giá trị subscription; phí nằm trong gói trả tiền", "source_title": "Qover - Revolut", "source_url": "https://www.qover.com/case-studies/embedded-insurance-supporting-revolut-clients-in-their-everyday-lives"}, {"id": 12, "case": "Monese + Qover", "industry": "Neobank / fintech", "product": "Bills protection, purchase protection", "touchpoint": "Trong gói Classic/Premium", "metric": "Không công bố conversion; dùng bảo hiểm để tăng giá trị gói trả phí", "metric_type": "Product proxy", "revenue_model": "Subscription banking bundle", "source_title": "Qover - Monese", "source_url": "https://www.qover.com/case-study/money-app-monese-offers-consumers-embedded-insurance-products"}, {"id": 13, "case": "Nubank + Chubb", "industry": "Neobank / fintech", "product": "Life/accident/embedded protection", "touchpoint": "Trong app ngân hàng số", "metric": "150.000 policy trong 30 ngày; nguồn khác ghi 900.000+ policy sau 1,5 năm, NPS 85", "metric_type": "Policy volume/NPS", "revenue_model": "Phí bảo hiểm, commission/revenue share", "source_title": "Chubb Partners", "source_url": "https://www.chubb.com/us-en/partners.html"}, {"id": 14, "case": "GCash + Chubb", "industry": "E-wallet / payments", "product": "Bill protection", "touchpoint": "Luồng thanh toán hóa đơn", "metric": "Phí động khoảng 1% giá trị hóa đơn", "metric_type": "Pricing model/proxy", "revenue_model": "Micro-premium tính theo bill, revenue share", "source_title": "Chubb Studio Connect", "source_url": "https://studio.chubb.com/connect/partners"}, {"id": 15, "case": "JKOPay + bolttech", "industry": "E-wallet / payments", "product": "Insurance marketplace / embedded offers", "touchpoint": "Trong ví điện tử", "metric": "Hơn 1 triệu lượt visit trong 6 tháng; 46% conversion của registered users; giao dịch khoảng 3 phút; conversion 2-3 lần peer", "metric_type": "Conversion", "revenue_model": "Phí bảo hiểm, commission/revenue share", "source_title": "bolttech - JKOPay", "source_url": "https://bolttech.io/case-studies/jkopay-case-study/"}, {"id": 16, "case": "Financial services partner + bolttech", "industry": "Ngân hàng/tài chính", "product": "Embedded protection products", "touchpoint": "Digital flow của tổ chức tài chính", "metric": "Doanh thu tăng 75%; conversion tăng 135%; NPS tăng 80%; quoted premium tăng 100%", "metric_type": "Revenue/conversion/NPS uplift", "revenue_model": "Commission, revenue share, lead-to-policy", "source_title": "bolttech - Financial services", "source_url": "https://bolttech.io/case-studies/financial-services-case-study/"}, {"id": 17, "case": "Global bank/telco examples + Chubb", "industry": "Bank / telco / fintech", "product": "Account protection, home, bill, ride, device", "touchpoint": "App hoặc checkout của partner", "metric": "Chubb xử lý 2,5 tỷ API calls/năm; 98,5% quote embedded trả dưới 1 giây", "metric_type": "Platform capability/proxy", "revenue_model": "API embedded, premium + commission", "source_title": "Chubb Partners", "source_url": "https://www.chubb.com/us-en/partners.html"}, {"id": 18, "case": "Digital bank customer research + Cover Genius", "industry": "Banking / fintech", "product": "Embedded insurance qua bank/fintech", "touchpoint": "Trong app ngân hàng, BNPL, accounting, wallet", "metric": "70% khách digital bank quan tâm; hơn 85% khách BNPL ở nhiều nước quan tâm; accounting software users hơn 90%; wallet 75%", "metric_type": "Survey intent", "revenue_model": "Cross-sell insurance", "source_title": "Cover Genius - Banking report", "source_url": "https://covergenius.com/resources/reports/embedded-insurance-global-report/"}, {"id": 19, "case": "US bank customers + Cover Genius", "industry": "Banking Mỹ", "product": "Purchase/event/travel/device protection", "touchpoint": "Trong app ngân hàng", "metric": "45% khách Mỹ rất quan tâm; digital bank 70%; major purchase/event 56% vs 27%", "metric_type": "Survey intent", "revenue_model": "Bank commission/revenue share", "source_title": "Cover Genius - US report", "source_url": "https://covergenius.com/resources/reports/embedded-insurance-report-us/"}, {"id": 20, "case": "Polly auto dealer network", "industry": "Auto retail / dealership fintech", "product": "Auto insurance quote/bind", "touchpoint": "Trong quy trình mua xe/F&I", "metric": "Khi shopper thấy quote: F&I gross +20% / +$313 mỗi deal; khi mua policy: +31% / +$501; top dealers hơn 40%", "metric_type": "Revenue uplift / dealer performance", "revenue_model": "Commission referral, insurance sale at dealership", "source_title": "Polly Q2 2025", "source_url": "https://www.polly.co/quarterly-report-q2-2025"}, {"id": 21, "case": "Polly auto dealer network Q1", "industry": "Auto retail / dealership fintech", "product": "Auto insurance", "touchpoint": "F&I checkout mua xe", "metric": "F&I gross +21% khi quote hiển thị; +28% / +$432 khi policy được mua", "metric_type": "Revenue uplift", "revenue_model": "Commission/referral", "source_title": "Polly Q1 2025", "source_url": "https://www.polly.co/newsletter/q1-2025-report-how-auto-insurance-is-becoming-a-dealer-profit-driver"}, {"id": 22, "case": "Marsh Affinity mobility warranty", "industry": "Automotive / mobility", "product": "Extended warranty", "touchpoint": "Trong quy trình bán/servicing xe", "metric": "150.000 hợp đồng, 50.000 claim phân tích; 80% claim tự động duyệt; claim từ vài ngày xuống vài giây", "metric_type": "Ops/scale proxy", "revenue_model": "Premium + service/administrator margin", "source_title": "Marsh - Mobility embedded insurance", "source_url": "https://www.marsh.com/en/services/affinity/insights/embedded-insurance-future-mobility-sector1.html"}, {"id": 23, "case": "Tesla Insurance", "industry": "EV / connected car", "product": "Auto insurance realtime", "touchpoint": "Tesla app; premium theo Safety Score, mileage, FSD", "metric": "Không công bố conversion; phí cá nhân hóa theo hành vi lái xe", "metric_type": "Pricing model/proxy", "revenue_model": "Premium trực tiếp từ khách hàng", "source_title": "Tesla - Real-time insurance", "source_url": "https://www.tesla.com/support/insurance/tesla-real-time-insurance"}, {"id": 24, "case": "Tesla FSD discount", "industry": "EV / connected car", "product": "Auto insurance discount", "touchpoint": "Tesla insurance pricing", "metric": "Giảm tối đa 10% trên một số coverage khi dùng FSD Supervised", "metric_type": "Pricing incentive", "revenue_model": "Premium trực tiếp, giữ chân hệ sinh thái", "source_title": "Tesla - FSD insurance", "source_url": "https://www.tesla.com/support/insurance/fsd"}, {"id": 25, "case": "Immoweb + Qover", "industry": "Real estate marketplace", "product": "Home/rent protection", "touchpoint": "Trong journey tìm thuê/mua nhà", "metric": "3,7 triệu unique visitors/tháng; 20.000 users/tháng cho Immoweb Protect; launch 4 tháng", "metric_type": "User volume/proxy", "revenue_model": "Compensation per insurance contract sold", "source_title": "Qover - Immoweb", "source_url": "https://www.qover.com/case-studies/immoweb-insurance-qover-create-value-revenue"}, {"id": 26, "case": "Rhino + Cover Genius", "industry": "Rental / proptech", "product": "Renters insurance", "touchpoint": "One-touch trong rental flow", "metric": "Mua bảo hiểm dưới 1 phút", "metric_type": "UX/proxy", "revenue_model": "Premium + commission", "source_title": "Cover Genius - Rhino", "source_url": "https://covergenius.com/resources/case-study/rhino-demo/"}, {"id": 27, "case": "Rhino + Haley Residential", "industry": "Property management", "product": "Security deposit insurance", "touchpoint": "Tenant onboarding", "metric": "11.000 units trong 3 tháng; 2/3 renters enroll; bad debt giảm 3 lần", "metric_type": "Enrollment/ops", "revenue_model": "Premium thay thế tiền cọc; partner revenue/fee", "source_title": "Rhino - Haley Residential", "source_url": "https://www.sayrhino.com/blog/posts/haley-residential"}, {"id": 28, "case": "Rhino owner/operator data", "industry": "Property management", "product": "Security deposit insurance", "touchpoint": "Leasing flow", "metric": "80% renters nhận quote Rhino thì enroll; chi phí move-in upfront giảm 90%; claim trung bình trả 4 ngày", "metric_type": "Enrollment/claim speed", "revenue_model": "Premium/fee model", "source_title": "Rhino - Benefits", "source_url": "https://www.sayrhino.com/blog/posts/benefits-of-security-deposit-insurance-for-owners-and-operators"}, {"id": 29, "case": "Alcove + Sure", "industry": "Rental / roommate housing", "product": "Renters insurance", "touchpoint": "Required renters insurance flow", "metric": "Conversion cao hơn benchmark 30%; quote initiation +18%; launch dưới 1 tháng", "metric_type": "Conversion uplift", "revenue_model": "Premium + commission", "source_title": "Sure - Alcove", "source_url": "https://www.sureapp.com/newsroom/alcove-case-study"}, {"id": 30, "case": "TurboTenant + Sure", "industry": "Rental management SaaS", "product": "Renters insurance", "touchpoint": "API embedded trong tenant flow", "metric": "Conversion tăng 29% trong tuần đầu sau API release", "metric_type": "Conversion uplift", "revenue_model": "Premium + commission", "source_title": "Sure - TurboTenant", "source_url": "https://www.sureapp.com/newsroom/turbotenant-case-study"}, {"id": 31, "case": "Common + Sure", "industry": "Co-living / property management", "product": "Renters insurance", "touchpoint": "Tenant onboarding", "metric": "67% tenant mới chọn renters insurance trong onboarding", "metric_type": "Attach/conversion", "revenue_model": "Premium + commission", "source_title": "Sure - Common", "source_url": "https://www.sureapp.com/newsroom/press-release-sure-and-common-join-forces-to-create-a-scalable-embedded-insurance-experience-for-residents"}, {"id": 32, "case": "Regional property manager + Sure Verify", "industry": "Property management", "product": "Renters insurance compliance", "touchpoint": "Verification/insurance compliance workflow", "metric": "Compliance 97% so với industry standard khoảng 50%", "metric_type": "Compliance proxy", "revenue_model": "Verification + policy funnel", "source_title": "Sure - Verify case", "source_url": "https://www.sureapp.com/newsroom/regional-property-management-firm-case-study"}, {"id": 33, "case": "Moved + REIN", "industry": "Moving / relocation marketplace", "product": "Renters, auto, pet insurance", "touchpoint": "Trong move journey", "metric": "56,6% conversion; premium growth 15 lần; commission +383%", "metric_type": "Conversion/revenue", "revenue_model": "Commission/revenue share", "source_title": "REIN case examples", "source_url": "https://reinai.lovable.app/"}, {"id": 34, "case": "Ryder + REIN", "industry": "Truck rental / logistics", "product": "Embedded rental/truck protection", "touchpoint": "Trong rental flow", "metric": "Bound policies +767%; bind rate tăng 5 lần; premium +130%", "metric_type": "Policy/conversion/revenue uplift", "revenue_model": "Premium + commission", "source_title": "REIN case examples", "source_url": "https://reinai.lovable.app/"}, {"id": 35, "case": "NEXT + online payroll provider", "industry": "Payroll SaaS / SMB software", "product": "Workers compensation", "touchpoint": "Payroll setup/compliance flow", "metric": "Digital workers comp sales +70%; revenue +45%; sau 1 năm sales số +247%, revenue số +370%, premium/sale +35%", "metric_type": "Sales/revenue uplift", "revenue_model": "Commission/revenue share; compliance cross-sell", "source_title": "NEXT - Payroll case", "source_url": "https://www.nextinsurance.com/become-a-partner/payroll-case-study/"}, {"id": 36, "case": "Gusto + NEXT", "industry": "Payroll SaaS / SMB", "product": "Workers compensation", "touchpoint": "Embedded payroll workflow", "metric": "Không công bố conversion; case nhấn mạnh trải nghiệm embedded payroll", "metric_type": "Product proxy", "revenue_model": "Commission/revenue share", "source_title": "NEXT + Gusto", "source_url": "https://www.nextinsurance.com/blog/next-insurance-and-gusto-expand-partnership-to-modernize-embedded-payroll-experience/"}, {"id": 37, "case": "QuickBooks / Intuit + NEXT", "industry": "Accounting / SMB finance", "product": "Business insurance", "touchpoint": "QuickBooks ecosystem", "metric": "Không công bố conversion; nhúng NEXT Connect trong hệ sinh thái QuickBooks", "metric_type": "Product proxy", "revenue_model": "Commission/revenue share", "source_title": "NEXT - QuickBooks", "source_url": "https://www.nextinsurance.com/blog/next-launches-its-embedded-solution-next-connect-within-intuits-quickbooks-ecosystem/"}, {"id": 38, "case": "Deliveroo + Qover", "industry": "Gig economy / food delivery", "product": "Rider accident/income protection", "touchpoint": "Rider platform", "metric": "45.000 riders covered; 90% satisfaction", "metric_type": "Adoption/NPS proxy", "revenue_model": "Platform-funded benefit hoặc insurer partnership", "source_title": "Qover - Deliveroo", "source_url": "https://www.qover.com/case-studies/deliveroo-protecting-gig-workers-and-attracting-new-talent-with-insurance"}, {"id": 39, "case": "Canyon + Qover", "industry": "Direct-to-consumer bikes/e-bike", "product": "Bike/e-bike insurance", "touchpoint": "Checkout xe đạp", "metric": "Không công bố conversion; mục tiêu kéo dài quan hệ sau bán", "metric_type": "Product proxy", "revenue_model": "Premium add-on, revenue share", "source_title": "Qover - Canyon", "source_url": "https://www.qover.com/case-studies/embedded-bike-insurance-canyon-customer-relationship"}, {"id": 40, "case": "Glamnetic + Extend", "industry": "DTC beauty/e-commerce", "product": "Shipping protection", "touchpoint": "Checkout", "metric": "68% attach; +6% sitewide conversion; $100.000 sales trong 6 tháng", "metric_type": "Attach/conversion/revenue", "revenue_model": "Fee shipping protection, merchant margin/revenue share", "source_title": "Extend - Glamnetic", "source_url": "https://www.extend.com/merchant-case-studies/glamnetic-shipping-protection"}, {"id": 41, "case": "My Trio Rings + Extend", "industry": "Jewelry e-commerce", "product": "Product protection", "touchpoint": "Checkout", "metric": "32% attach; conversion YoY +10,56%; AOV +15,3%", "metric_type": "Attach/conversion/AOV", "revenue_model": "Protection plan revenue", "source_title": "Extend - My Trio Rings", "source_url": "https://www.extend.com/merchant-case-studies/my-trio-rings"}, {"id": 42, "case": "BlendJet + Extend", "industry": "Consumer electronics / DTC", "product": "Product protection", "touchpoint": "Checkout", "metric": "11,4% attach; 11% sitewide sales conversion; $500.000 protection sales", "metric_type": "Attach/sales", "revenue_model": "Protection plan revenue", "source_title": "Extend - BlendJet", "source_url": "https://www.extend.com/merchant-case-studies/blendjet"}, {"id": 43, "case": "Felix Gray + Extend", "industry": "Eyewear e-commerce", "product": "Product protection", "touchpoint": "Checkout + abandoned cart email", "metric": "Attach tăng 200%, từ 2-3% lên 8-9%; overall attach 19,3%; abandoned cart email conversion +250-300%; product page conversion 9,7% vs site 2,4%", "metric_type": "Attach/conversion uplift", "revenue_model": "Protection plan revenue", "source_title": "Extend - Felix Gray", "source_url": "https://www.extend.com/merchant-case-studies/felix-gray"}, {"id": 44, "case": "Baby Brezza + Extend", "industry": "Baby products e-commerce", "product": "Product protection", "touchpoint": "Checkout", "metric": "8,8% attach; AOV +15%", "metric_type": "Attach/AOV", "revenue_model": "Protection plan revenue", "source_title": "Extend - Baby Brezza", "source_url": "https://www.extend.com/merchant-case-studies/baby-brezza"}, {"id": 45, "case": "1MORE + Extend", "industry": "Audio electronics e-commerce", "product": "Product protection", "touchpoint": "Checkout", "metric": "14,6% attach; revenue +2,3%", "metric_type": "Attach/revenue", "revenue_model": "Protection plan revenue", "source_title": "Extend - 1MORE", "source_url": "https://www.extend.com/merchant-case-studies/1more"}, {"id": 46, "case": "Visionworks + Extend", "industry": "Optical retail / omnichannel", "product": "Product protection", "touchpoint": "POS / retail associate flow", "metric": "Attach gấp 3 lần legacy provider; 4.473 associates trained", "metric_type": "Attach uplift", "revenue_model": "Protection plan revenue", "source_title": "Extend - Visionworks", "source_url": "https://www.extend.com/merchant-case-studies/visionworks-drives-3x-product-protection-plan-attachment"}, {"id": 47, "case": "SoClean + Extend", "industry": "Health/device DTC", "product": "Product protection", "touchpoint": "Checkout", "metric": "20,1% attach; attach +109%; revenue +167%", "metric_type": "Attach/revenue uplift", "revenue_model": "Protection plan revenue", "source_title": "Extend - SoClean", "source_url": "https://www.extend.com/merchant-case-studies/soclean"}, {"id": 48, "case": "Bear Mattress + Extend", "industry": "Mattress e-commerce", "product": "Product protection", "touchpoint": "Checkout", "metric": "16% attach", "metric_type": "Attach", "revenue_model": "Protection plan revenue", "source_title": "Extend - Bear Mattress", "source_url": "https://www.extend.com/merchant-case-studies/bear"}, {"id": 49, "case": "The Dufresne Group + Extend", "industry": "Furniture retail", "product": "Product protection", "touchpoint": "Omnichannel / store", "metric": "40% attach; warrantable products +28%; 53 stores onboarded", "metric_type": "Attach/adoption", "revenue_model": "Protection plan revenue", "source_title": "Extend - Dufresne", "source_url": "https://www.extend.com/merchant-case-studies/the-dufresne-group-canada"}, {"id": 50, "case": "Voro Motors + Extend", "industry": "E-scooter / micromobility retail", "product": "Product protection", "touchpoint": "Checkout", "metric": "Attach +205%, từ 16% lên 49%; contract sales +447%; revenue +261%", "metric_type": "Attach/revenue uplift", "revenue_model": "Protection plan revenue", "source_title": "Extend - Voro Motors", "source_url": "https://www.extend.com/merchant-case-studies/voro-motors"}, {"id": 51, "case": "Monster Transmission + Extend", "industry": "Auto parts e-commerce", "product": "Product protection", "touchpoint": "Checkout + telesales", "metric": "Conversion +120%; telesales +30-40%; 0 customer pushback", "metric_type": "Conversion/sales uplift", "revenue_model": "Protection plan revenue", "source_title": "Extend - Monster Transmission", "source_url": "https://www.extend.com/merchant-case-studies/monster-transmission"}, {"id": 52, "case": "Resident + Extend", "industry": "Mattress/furniture DTC", "product": "Product protection", "touchpoint": "Checkout", "metric": "Attach gấp 2 lần provider trước", "metric_type": "Attach uplift", "revenue_model": "Protection plan revenue", "source_title": "Extend - Resident", "source_url": "https://www.extend.com/merchant-case-studies/resident"}, {"id": 53, "case": "Assurant retail protection optimization", "industry": "Retail / e-commerce", "product": "Product protection", "touchpoint": "POS/checkout optimization", "metric": "Attach +215 bps; category attach +125 bps; protection sales volume +53%; attach +60%, duy trì +40%", "metric_type": "Attach/sales uplift", "revenue_model": "Protection plan revenue", "source_title": "Assurant - Retail protection", "source_url": "https://www.assurant.com/news-insights/articles/maximize-retail-protection-program-revenue"}, {"id": 54, "case": "Vertical Insure + WrestlingIQ", "industry": "Sports registration SaaS", "product": "Registration cancellation / participant insurance", "touchpoint": "Checkout đăng ký giải/lớp", "metric": "11,5% combined conversion trong 1 tháng; 2 tuần dev; rollout 100%", "metric_type": "Conversion", "revenue_model": "Marketing payment per policy sold", "source_title": "Vertical Insure - WrestlingIQ", "source_url": "https://verticalinsure.com/partner-stories/wrestlingiq-taps-into-new-revenue-and-protects-customer-profits-with-embedded-insurance/"}, {"id": 55, "case": "Vertical Insure + Aktivate", "industry": "School/youth sports SaaS", "product": "Gap medical insurance", "touchpoint": "Đăng ký hoạt động thể thao", "metric": "Hơn 5% conversion tháng đầu; rollout 100%; 50 states, 80+ activities; 20h dev", "metric_type": "Conversion", "revenue_model": "Marketing payment / commission", "source_title": "Vertical Insure - Aktivate", "source_url": "https://verticalinsure.com/partner-stories/aktivate-empowers-more-children-to-participate-in-youth-sports-with-embedded-insurance/"}, {"id": 56, "case": "Vertical Insure + Goodshuffle", "industry": "Event rental SaaS", "product": "Event host liability", "touchpoint": "Event rental checkout", "metric": "Policy purchase conversion +50%; ineligible quote requests -12%; max rented item coverage tăng $10k lên $15k", "metric_type": "Conversion/ops uplift", "revenue_model": "Commission/revenue share", "source_title": "Vertical Insure - Goodshuffle", "source_url": "https://verticalinsure.com/partner-stories/goodshuffle-event-host-liability/"}, {"id": 57, "case": "Vertical Insure + Lodgix", "industry": "Vacation rental SaaS", "product": "Travel/vacation rental protection", "touchpoint": "Booking/rental platform", "metric": "Launch 3 ngày; có sales sau 1 tuần; portal theo dõi policy sales, conversion, GWP", "metric_type": "Speed/proxy", "revenue_model": "Commission/revenue share", "source_title": "Vertical Insure - Lodgix", "source_url": "https://verticalinsure.com/partner-stories/lodgix-uses-ai-led-integration/"}, {"id": 58, "case": "Vertical Insure event category", "industry": "Event platforms", "product": "Event host liability", "touchpoint": "Event checkout/registration", "metric": "Average conversion 16% trên trang ngành event", "metric_type": "Category benchmark", "revenue_model": "Commission/revenue share", "source_title": "Vertical Insure - Events", "source_url": "https://verticalinsure.com/events/"}, {"id": 59, "case": "Extend benchmark", "industry": "E-commerce / retail", "product": "Extended warranty/product protection", "touchpoint": "Checkout", "metric": "Attach 15% so với industry average 5-6%; warranty có thể thêm 10-15% cart value", "metric_type": "Benchmark", "revenue_model": "Protection plan revenue", "source_title": "Extend - POS financing & warranties", "source_url": "https://www.extend.com/post/point-of-sale-consumer-financing-and-extended-warranties-a-perfect-match"}, {"id": 60, "case": "Extend omnichannel benchmark", "industry": "Retail / e-commerce", "product": "Product protection", "touchpoint": "Online + store", "metric": "Sitewide conversion +11%; attach 12,4%; in-store conversion 3%, $540k monthly sales", "metric_type": "Benchmark/case proxy", "revenue_model": "Protection plan revenue", "source_title": "Extend - Omnichannel", "source_url": "https://www.extend.com/post/omnichannel-customer-experience-and-product-protection"}, {"id": 61, "case": "SGS Engineering + Quotall", "industry": "Tools/equipment e-commerce", "product": "Extended warranty / protection", "touchpoint": "Checkout", "metric": "Attach đến 20%; basket conversion +3-5%; live 2 tuần", "metric_type": "Attach/conversion uplift", "revenue_model": "Protection plan revenue", "source_title": "Quotall LinkedIn post", "source_url": "https://www.linkedin.com/posts/quotall_embeddedinsurance-insuranceatcheckout-ecommercerevenue-activity-7445439056173322240-Zd4f"}, {"id": 62, "case": "Toyota GAP motor attempt + Qover", "industry": "Automotive finance / dealer", "product": "GAP motor insurance", "touchpoint": "Quote/checkout", "metric": "17.000 quotes nhưng chỉ 8 policies", "metric_type": "Failure case / conversion rất thấp", "revenue_model": "Premium/commission không hiệu quả", "source_title": "Qover - 10 years lessons", "source_url": "https://www.qover.com/blog/10-years-embedded-insurance-scale-lessons"}, {"id": 63, "case": "Nomad Assistance + Qover", "industry": "Travel / assistance", "product": "Travel assistance insurance", "touchpoint": "Travel flow", "metric": "Đạt EUR1M GWP rồi bị COVID làm carrier rút", "metric_type": "GWP / risk case", "revenue_model": "Premium/commission, carrier dependency", "source_title": "Qover - 10 years lessons", "source_url": "https://www.qover.com/blog/10-years-embedded-insurance-scale-lessons"}];
+    const models = [{"model": "Commission/revenue share theo policy", "how_it_works": "Nền tảng nhận % phí hoặc khoản cố định khi policy bán thành công", "suitable_platforms": "Marketplace, bank, ví điện tử, booking, ticketing"}, {"model": "Embedded subscription bundle", "how_it_works": "Bảo hiểm nằm trong gói trả phí để tăng ARPU và retention", "suitable_platforms": "Neobank, membership, premium card/app"}, {"model": "Micro-premium theo giao dịch", "how_it_works": "Phí rất nhỏ theo chuyến, bill, đơn hàng hoặc lượt đăng ký", "suitable_platforms": "Ride-hailing, payment, ticketing, logistics"}, {"model": "Freemium + upsell", "how_it_works": "Tặng coverage cơ bản, bán thêm mức bảo vệ cao hơn", "suitable_platforms": "Logistics, bank app, travel, e-commerce"}, {"model": "Lead/referral fee", "how_it_works": "Nền tảng tạo lead đủ điều kiện cho insurer/broker", "suitable_platforms": "Auto dealer, SME SaaS, real estate"}, {"model": "Risk-funded benefit", "how_it_works": "Nền tảng tài trợ một phần bảo hiểm để tăng loyalty/retention", "suitable_platforms": "Gig platform, premium banking, travel membership"}];
+    const vnSuggestions = [{"priority": 1, "product": "Bảo vệ giao dịch / tài khoản số", "platforms": "Mobile banking, ví điện tử", "rationale": "Rủi ro lừa đảo, chuyển nhầm, mất quyền truy cập đang rất \"đúng thời điểm\" trong app ngân hàng", "risk": "Phải định nghĩa loại rủi ro được bồi thường cực rõ; nếu claim bị từ chối nhiều sẽ phản tác dụng"}, {"priority": 2, "product": "Bill protection", "platforms": "Thanh toán điện/nước/internet/học phí trong bank app", "rationale": "Học từ GCash: premium nhỏ theo hóa đơn, dễ hiểu, dễ thử", "risk": "Cần tránh biến thành phí vô hình; nên opt-in từng bill hoặc subscription minh bạch"}, {"priority": 3, "product": "Purchase protection cho thẻ/debit/credit", "platforms": "Card transaction, QR/VNPay, e-commerce liên kết bank", "rationale": "Gần với hành vi chi tiêu; có thể nâng cấp gói thẻ premium", "risk": "Phải tránh chồng chéo quyền lợi chargeback/bảo hành của merchant"}, {"priority": 4, "product": "Phone screen/device protection", "platforms": "Mobile banking, telco, e-commerce", "rationale": "Việt Nam smartphone-first; phí nhỏ, quyền lợi cụ thể", "risk": "Fraud risk cao; cần quy trình xác thực thiết bị và ảnh/video trước khi bảo hiểm có hiệu lực"}, {"priority": 5, "product": "Travel delay/cancellation", "platforms": "Mua vé máy bay/khách sạn qua bank app, thẻ du lịch", "rationale": "Case travel có nhiều bằng chứng attach tốt sau COVID", "risk": "Nhu cầu mùa vụ; claim delay cần tự động hóa dữ liệu chuyến bay"}, {"priority": 6, "product": "Accident micro-insurance", "platforms": "Chuyển khoản, top-up, payroll, gig payout", "rationale": "Phí thấp dễ thử; phù hợp mass market", "risk": "Dễ trở thành sản phẩm \"mua cho có\"; cần claim cực nhanh và quyền lợi dễ nhớ"}, {"priority": 7, "product": "SME workers comp / liability", "platforms": "Business banking, payroll, kế toán", "rationale": "Học từ NEXT: đúng lúc doanh nghiệp xử lý lương/compliance", "risk": "Việt Nam cần mapping đúng quy định lao động, BHXH và bảo hiểm thương mại"}, {"priority": 8, "product": "Auto insurance at loan/vehicle journey", "platforms": "Auto loan, app ngân hàng, showroom liên kết", "rationale": "Học từ Polly: mua xe là khoảnh khắc mạnh để quote bảo hiểm", "risk": "Cần tách khỏi điều kiện vay; minh bạch nhiều nhà bảo hiểm/giá để tránh cảm giác ép mua"}];
 
-      // Search functionality for tables
+    document.addEventListener("DOMContentLoaded", function() {
+      renderTable(cases);
+      renderRevenueModels(models);
+      renderVnRoadmap(vnSuggestions);
+      setupFilters();
+    });
+
+    function getBadgeClass(type) {
+      const t = type.toLowerCase();
+      if (t.includes('uplift') || t.includes('attach')) return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
+      if (t.includes('conversion')) return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
+      if (t.includes('proxy') || t.includes('volume')) return 'bg-blue-500/10 text-blue-400 border-blue-500/20';
+      if (t.includes('failure') || t.includes('risk')) return 'bg-rose-500/10 text-rose-400 border-rose-500/20';
+      return 'bg-slate-700/50 text-slate-300 border-slate-600';
+    }
+
+    function renderTable(data) {
+      const tbody = document.getElementById("caseTableBody");
+      tbody.innerHTML = "";
+
+      data.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-800/80 transition-colors border-b border-slate-700/40";
+        tr.dataset.industry = item.industry.toLowerCase();
+        tr.dataset.metricType = item.metric_type.toLowerCase();
+
+        let sourceHtml = '<span class="text-slate-500 text-xs">Không công bố</span>';
+        if (item.source_url) {
+          sourceHtml = `<a href="${item.source_url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 hover:text-indigo-200 border border-indigo-500/30 text-xs font-medium transition-colors">
+            ${item.source_title || 'Xem Nguồn'}
+            <svg class="w-3.5 h-3.5 ml-1 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>`;
+        } else if (item.source_title) {
+          sourceHtml = `<span class="text-slate-400 text-xs">${item.source_title}</span>`;
+        }
+
+        const badgeClass = getBadgeClass(item.metric_type);
+
+        tr.innerHTML = `
+          <td class="py-3.5 px-4 text-center font-mono text-xs text-slate-500">${item.id}</td>
+          <td class="py-3.5 px-4 font-semibold text-white">${item.case}</td>
+          <td class="py-3.5 px-4 text-slate-300">${item.industry}</td>
+          <td class="py-3.5 px-4 text-slate-200">${item.product}</td>
+          <td class="py-3.5 px-4 text-slate-400 text-xs">${item.touchpoint}</td>
+          <td class="py-3.5 px-4 font-medium text-slate-100">${item.metric}</td>
+          <td class="py-3.5 px-4">
+            <span class="inline-block px-2.5 py-1 rounded-full text-xs font-semibold border ${badgeClass}">
+              ${item.metric_type}
+            </span>
+          </td>
+          <td class="py-3.5 px-4 text-slate-300 text-xs">${item.revenue_model}</td>
+          <td class="py-3.5 px-4">${sourceHtml}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      updateCounter();
+    }
+
+    function renderRevenueModels(modelsData) {
+      const container = document.getElementById("revenueGrid");
+      container.innerHTML = "";
+
+      modelsData.forEach(m => {
+        const card = document.createElement("div");
+        card.className = "bg-slate-800/80 border border-slate-700 rounded-xl p-6 shadow-lg flex flex-col justify-between hover:border-slate-600 transition-all";
+        card.innerHTML = `
+          <div>
+            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3">Mô Hình Kinh Doanh</span>
+            <h4 class="text-lg font-bold text-white mb-2">${m.model}</h4>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">${m.how_it_works}</p>
+          </div>
+          <div class="pt-4 border-t border-slate-700/60">
+            <p class="text-xs text-slate-400"><strong class="text-slate-200">Phù hợp nền tảng:</strong> ${m.suitable_platforms}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderVnRoadmap(vnData) {
+      const container = document.getElementById("vnRoadmapGrid");
+      container.innerHTML = "";
+
+      vnData.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "bg-slate-800/80 border border-slate-700 rounded-xl p-6 shadow-lg space-y-4 hover:border-indigo-500/40 transition-all";
+        card.innerHTML = `
+          <div class="flex items-center justify-between border-b border-slate-700/60 pb-3">
+            <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-extrabold text-sm shadow">
+              #${item.priority}
+            </span>
+            <span class="text-xs font-semibold text-slate-400">Ưu tiên triển khai ${item.priority}</span>
+          </div>
+          <div>
+            <h4 class="text-base font-bold text-white mb-1">${item.product}</h4>
+            <p class="text-xs text-indigo-400 font-medium">Nền tảng mục tiêu: ${item.platforms}</p>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-700/40">
+              <span class="text-emerald-400 font-bold block mb-1">Vì sao đáng thử:</span>
+              <p class="text-slate-300">${item.rationale}</p>
+            </div>
+            <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-700/40">
+              <span class="text-rose-400 font-bold block mb-1">Rủi ro & Quản trị:</span>
+              <p class="text-slate-300">${item.risk}</p>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function setupFilters() {
       const searchInput = document.getElementById("searchInput");
-      searchInput.addEventListener("input", function() {
+      const filterBtns = document.querySelectorAll(".filter-btn");
+
+      let currentCategory = "all";
+
+      searchInput.addEventListener("input", filterData);
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", function() {
+          filterBtns.forEach(b => {
+            b.classList.remove("bg-indigo-600", "text-white", "active-filter");
+            b.classList.add("bg-slate-700", "text-slate-300");
+          });
+          this.classList.remove("bg-slate-700", "text-slate-300");
+          this.classList.add("bg-indigo-600", "text-white", "active-filter");
+
+          currentCategory = this.dataset.filter;
+          filterData();
+        });
+      });
+
+      function filterData() {
         const query = searchInput.value.toLowerCase().trim();
-        const rows = document.querySelectorAll(".markdown-body table tbody tr");
+        const rows = document.querySelectorAll("#caseTableBody tr");
+
         rows.forEach(row => {
           const text = row.textContent.toLowerCase();
-          if (text.includes(query)) {
+          const industry = row.dataset.industry || "";
+
+          let matchCategory = true;
+          if (currentCategory !== "all") {
+            if (currentCategory === "e-commerce") matchCategory = industry.includes("e-commerce") || industry.includes("marketplace") || industry.includes("retail");
+            else if (currentCategory === "travel") matchCategory = industry.includes("hàng không") || industry.includes("du lịch") || industry.includes("travel");
+            else if (currentCategory === "fintech") matchCategory = industry.includes("bank") || industry.includes("fintech") || industry.includes("super app") || industry.includes("neobank") || industry.includes("payments");
+            else if (currentCategory === "proptech") matchCategory = industry.includes("rental") || industry.includes("proptech") || industry.includes("real estate") || industry.includes("property");
+            else if (currentCategory === "auto") matchCategory = industry.includes("auto") || industry.includes("automotive") || industry.includes("mobility") || industry.includes("ev");
+            else if (currentCategory === "saas") matchCategory = industry.includes("saas") || industry.includes("payroll") || industry.includes("accounting") || industry.includes("smb");
+            else if (currentCategory === "events") matchCategory = industry.includes("event") || industry.includes("ticketing") || industry.includes("sports");
+          }
+
+          let matchSearch = text.includes(query);
+
+          if (matchCategory && matchSearch) {
             row.classList.remove("hidden-row");
           } else {
             row.classList.add("hidden-row");
           }
         });
-      });
-    });
+
+        updateCounter();
+      }
+    }
+
+    function updateCounter() {
+      const visibleRows = document.querySelectorAll("#caseTableBody tr:not(.hidden-row)").length;
+      const totalRows = document.querySelectorAll("#caseTableBody tr").length;
+      document.getElementById("resultCount").textContent = `Hiển thị ${visibleRows} / ${totalRows} case studies`;
+    }
   </script>
 </body>
 </html>
